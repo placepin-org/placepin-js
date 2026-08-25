@@ -1,5 +1,14 @@
 # @placepin/core-js
 
+> [!WARNING]
+> **Under construction — v0.x, and not ready to build on.**
+> The protocol is still a draft, the API is unstable, and anything here can
+> change without notice or a deprecation period. Please don't depend on it in
+> something you care about yet.
+>
+> For what placepin is and where it's going, see
+> **[about.placepin.org](https://about.placepin.org)**.
+
 The [placepin](https://placepin.org) location protocol in TypeScript — a 3-3-3
 hierarchical geographic code that turns any point on Earth into nine characters
 and back again.
