@@ -1,0 +1,71 @@
+{
+  "name": "@placepin/core-js",
+  "version": "0.1.0",
+  "description": "The placepin location protocol — a 3-3-3 hierarchical geographic code. Zero dependencies, no lookup service, works offline.",
+  "keywords": [
+    "geocode",
+    "location",
+    "placepin",
+    "offline",
+    "geohash",
+    "plus-codes",
+    "coordinates"
+  ],
+  "homepage": "https://placepin.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/placepin-org/placepin-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/placepin-org/placepin-js/issues"
+  },
+  "license": "Apache-2.0",
+  "author": "placepin.org",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./resolver": {
+      "types": "./dist/resolver.d.ts",
+      "default": "./dist/resolver.js"
+    },
+    "./vectors": {
+      "types": "./dist/vectors.d.ts",
+      "default": "./dist/vectors.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "bench": "vitest bench --run",
+    "size": "npm run build && esbuild dist/resolver.js --bundle --minify --format=esm --outfile=/tmp/placepin-size.js && gzip -9c /tmp/placepin-size.js | wc -c",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
