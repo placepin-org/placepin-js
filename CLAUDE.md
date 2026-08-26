@@ -42,8 +42,8 @@ The pre-snapping reference implementation failed containment checks.
 
 ## Conformance is the gate, not the source
 
-§03: *conformance is defined by the test vectors in Appendix A, not by the
-prose*, because `sin`/`cos`/`sqrt` are not bit-identical across platforms.
+§03: _conformance is defined by the test vectors in Appendix A, not by the
+prose_, because `sin`/`cos`/`sqrt` are not bit-identical across platforms.
 
 - If a change makes a vector fail, the change is wrong. Not the vector.
 - Changing a vector **is** changing the protocol — that happens in
@@ -56,11 +56,11 @@ prose*, because `sin`/`cos`/`sqrt` are not bit-identical across platforms.
 
 Two entry points, and the split is required by §01:
 
-| Entry | Status | Contains |
-|---|---|---|
-| `@placepin/core-js` | **normative** | `encode`, `decode`, the grid, geodesy |
-| `@placepin/core-js/resolver` | non-normative | `resolveLocalBlock`, `interpret` |
-| `@placepin/core-js/vectors` | fixtures | Appendix A |
+| Entry                        | Status        | Contains                              |
+| ---------------------------- | ------------- | ------------------------------------- |
+| `@placepin/core-js`          | **normative** | `encode`, `decode`, the grid, geodesy |
+| `@placepin/core-js/resolver` | non-normative | `resolveLocalBlock`, `interpret`      |
+| `@placepin/core-js/vectors`  | fixtures      | Appendix A                            |
 
 > Software MUST NOT decode a 3-character input as Block 1 (local) in isolation.
 > A product feature that lets someone type just a local value and resolves it
@@ -77,7 +77,7 @@ block genuinely means nothing on its own. Do not add a default.
 
 ## Why search is computed rather than indexed
 
-§08, normative: *Prefix-sharing implies nothing at all.* Two codes starting with
+§08, normative: _Prefix-sharing implies nothing at all._ Two codes starting with
 the same local block are usually continents apart, so a prefix index over
 placepin codes is meaningless by construction.
 
@@ -90,11 +90,11 @@ at ~1 ms rather than ~60. Do not remove the cache.
 
 Cost grows with the square of the radius:
 
-| radius | time |
-|---|---|
-| 1 km | 0.06 ms |
-| 5 km | 1.1 ms |
-| 20 km | **57 ms** — past frame budget |
+| radius | time                          |
+| ------ | ----------------------------- |
+| 1 km   | 0.06 ms                       |
+| 5 km   | 1.1 ms                        |
+| 20 km  | **57 ms** — past frame budget |
 
 `RADIUS_LADDER` exists for this. Search narrow on each keystroke; widen only
 when asked.
@@ -110,19 +110,19 @@ means it.
   A protocol change cannot enter a consumer through a routine update.
 - `PROTOCOL_VERSION` is exported so anything persisting a code can persist the
   revision alongside it. §10: v4 and v5 codes are not interchangeable and a
-  mismatch decodes to the *wrong location* rather than failing.
+  mismatch decodes to the _wrong location_ rather than failing.
 
 ## Layout
 
-| File | Responsibility |
-|---|---|
+| File               | Responsibility                                                       |
+| ------------------ | -------------------------------------------------------------------- |
 | `src/constants.ts` | Alphabet, base, factor, Earth radius, `PROTOCOL_VERSION`, error type |
-| `src/partition.ts` | **The normative routine.** Do not refactor. Memoised. |
-| `src/codec.ts` | `encode`, `decode`, `encodePath`, `normalize` |
-| `src/alphabet.ts` | Base-30 conversion, canonicalisation, validation |
-| `src/geo.ts` | Distance, bearing, cell metrics, `meanHeading` |
-| `src/resolver.ts` | Non-normative proximity search and `interpret()` |
-| `src/vectors.ts` | Appendix A |
+| `src/partition.ts` | **The normative routine.** Do not refactor. Memoised.                |
+| `src/codec.ts`     | `encode`, `decode`, `encodePath`, `normalize`                        |
+| `src/alphabet.ts`  | Base-30 conversion, canonicalisation, validation                     |
+| `src/geo.ts`       | Distance, bearing, cell metrics, `meanHeading`                       |
+| `src/resolver.ts`  | Non-normative proximity search and `interpret()`                     |
+| `src/vectors.ts`   | Appendix A                                                           |
 
 `meanHeading` averages **unit vectors**, not numbers. Headings wrap at 360°, so
 the arithmetic mean of 359° and 1° is 180° — exactly backwards, and precisely
@@ -139,5 +139,5 @@ when someone is pointing north.
 
 ## Conventions
 
-Commit email `hi@princeraju.com`, set per-repo. Brand is lowercase
+Brand is lowercase
 **placepin**, never "PlacePin".
